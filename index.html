@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Afterlife Call - Разговор с памятью</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #9c27b0, #3f51b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .warning {
+            background: rgba(244, 67, 54, 0.2);
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .section h2 {
+            color: #64b5f6;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .chat-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .message {
+            margin: 10px 0;
+            padding: 12px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s;
+        }
+        
+        .user-message {
+            background: #2196F3;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message {
+            background: #4CAF50;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-sender {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1em;
+        }
+        
+        .chat-input input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .chat-input button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #9c27b0, #3f51b5);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #9c27b0, #3f51b5);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .quick-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quick-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .relatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .relative-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .relative-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .relative-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #2196F3, #9C27B0);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-ready {
+            background: #4CAF50;
+        }
+        
+        .status-training {
+            background: #FFC107;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-input {
+                flex-direction: column;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🌌</div>
+            <h1>Afterlife Call</h1>
+            <p class="subtitle">Сохраните память и пообщайтесь с близкими через ИИ-симуляцию</p>
+            
+            <div class="warning">
+                ⚠️ <strong>Важное предупреждение:</strong> Это терапевтический инструмент для сохранения памяти. 
+                Все диалоги создаются искусственным интеллектом на основе предоставленной информации. 
+                Это НЕ настоящее общение с умершими.
+            </div>
+        </header>
+
+        <div class="sections">
+            <div class="section">
+                <h2>📁 Создайте профиль</h2>
+                <p>Сохраните память о близком человеке:</p>
+                <ul class="features">
+                    <li>Фотографии и видео</li>
+                    <li>Биография и воспоминания</li>
+                    <li>Особенности речи и характера</li>
+                    <li>Любимые фразы и истории</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>🤖 Обучите ИИ-модель</h2>
+                <p>На основе ваших данных создается персонализированная модель:</p>
+                <ul class="features">
+                    <li>Анализ манеры речи</li>
+                    <li>Имитация голоса</li>
+                    <li>Учет характера и привычек</li>
+                    <li>Персонализированные ответы</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>💬 Начните диалог</h2>
+                <p>Пообщайтесь через текстовый или видео-чат:</p>
+                <ul class="features">
+                    <li>Текстовые сообщения</li>
+                    <li>Голосовые ответы</li>
+                    <li>Видео с аватаром</li>
+                    <li>Эмоциональные реакции</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>💭 Демо-чат</h2>
+            <p>Попробуйте, как работает диалог с ИИ-симуляцией:</p>
+            
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai-message">
+                        <div class="message-sender">ИИ-Симуляция</div>
+                        <div>Привет. Я здесь, чтобы помочь сохранить память о вашем близком. Начните разговор, и я постараюсь отвечать так, как это мог бы делать он/она.</div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Введите сообщение..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">Отправить</button>
+                </div>
+                
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="quickMessage('Привет, как дела?')">Привет</button>
+                    <button class="quick-btn" onclick="quickMessage('Я скучаю по тебе')">Скучаю</button>
+                    <button class="quick-btn" onclick="quickMessage('Расскажи о нашем лучшем дне')">Воспоминание</button>
+                    <button class="quick-btn" onclick="quickMessage('Что бы ты мне посоветовал?')">Совет</button>
+                </div>
+            </div>
+        </div>
+
+        <h2>👨‍👩‍👧‍👦 Ваши родственники</h2>
+        <div class="relatives-grid" id="relativesGrid">
+            <!-- Родственники будут добавляться сюда -->
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="addRelative()">+ Добавить родственника</button>
+            <button class="btn btn-secondary" onclick="showInstructions()">📚 Инструкция</button>
+            <button class="btn btn-secondary" onclick="exportData()">💾 Экспорт данных</button>
+        </div>
+
+        <footer>
+            <p>Afterlife Call &copy; 2024 | Терапевтическое приложение для сохранения памяти</p>
+            <p style="margin-top: 10px; font-size: 0.8em;">
+                Если вы испытываете сложности с горем, обратитесь к профессиональному психологу.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Демо-данные
+        const demoRelatives = [
+            { id: 1, name: "Мама", relationship: "Мать", status: "ready", initials: "М" },
+            { id: 2, name: "Дедушка", relationship: "Дедушка", status: "training", initials: "Д" },
+            { id: 3, name: "Сестра", relationship: "Сестра", status: "ready", initials: "С" }
+        ];
+
+        const aiResponses = {
+            greeting: [
+                "Привет, дорогой. Как твои дела?",
+                "Здравствуй. Я думал(а) о тебе.",
+                "Приветствую тебя. Как прошел день?"
+            ],
+            memory: [
+                "Помню, как мы вместе... Это было прекрасное время.",
+                "Ах, те воспоминания... Они согревают меня до сих пор.",
+                "Да, я хорошо помню тот день. Мы были так счастливы."
+            ],
+            advice: [
+                "Главное - будь счастлив и береги близких.",
+                "Не бойся следовать за своей мечтой.",
+                "Помни, что трудности временны, а любовь вечна."
+            ],
+            love: [
+                "Я всегда буду любить тебя.",
+                "Моя любовь к тебе бесконечна.",
+                "Ты всегда в моем сердце."
+            ],
+            default: [
+                "Я понимаю тебя.",
+                "Расскажи мне больше об этом.",
+                "Это интересно. Продолжай."
+            ]
+        ];
+
+        // Загрузка страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRelatives();
+            
+            // Авто-сообщение через 2 секунды
+            setTimeout(() => {
+                addMessage('ai', 'Вы можете добавить профиль родственника, нажав кнопку выше, или сразу начать диалог со мной.');
+            }, 2000);
+        });
+
+        // Загрузить список родственников
+        function loadRelatives() {
+            const grid = document.getElementById('relativesGrid');
+            grid.innerHTML = '';
+            
+            if (demoRelatives.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <p style="font-size: 1.2em; opacity: 0.7;">Пока нет добавленных родственников</p>
+                        <button class="btn btn-primary" onclick="addRelative()" style="margin-top: 20px;">
+                            + Добавить первого
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            demoRelatives.forEach(relative => {
+                const card = document.createElement('div');
+                card.className = 'relative-card';
+                card.innerHTML = `
+                    <div class="relative-avatar">${relative.initials}</div>
+                    <h3>${relative.name}</h3>
+                    <p style="opacity: 0.8; margin: 5px 0;">${relative.relationship}</p>
+                    <p style="margin: 10px 0;">
+                        <span class="status-indicator status-${relative.status}"></span>
+                        ${relative.status === 'ready' ? 'Готов к общению' : 'Обучается ИИ'}
+                    </p>
+                    <button class="quick-btn" style="margin-top: 10px; width: 100%;" 
+                            onclick="startChat(${relative.id})" 
+                            ${relative.status !== 'ready' ? 'disabled style="opacity:0.5"' : ''}>
+                        💬 Начать диалог
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Отправить сообщение
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Добавить сообщение пользователя
+            addMessage('user', message);
+            input.value = '';
+            
+            // ИИ отвечает через 1-2 секунды
+            setTimeout(() => {
+                const aiResponse = generateAIResponse(message);
+                addMessage('ai', aiResponse);
+            }, 1000 + Math.random() * 1000);
+        }
+
+        // Быстрое сообщение
+        function quickMessage(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+
+        // Обработка нажатия Enter
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Добавить сообщение в чат
+        function addMessage(sender, text) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.innerHTML = `
+                <div class="message-sender">${sender === 'user' ? 'Вы' : 'ИИ-Симуляция'}</div>
+                <div>${text}</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Генерация ответа ИИ
+        function generateAIResponse(message) {
+            const msg = message.toLowerCase();
+            let category = 'default';
+            
+            if (msg.includes('привет') || msg.includes('здравствуй')) {
+                category = 'greeting';
+            } else if (msg.includes('помни') || msg.includes('вспомни') || msg.includes('памят')) {
+                category = 'memory';
+            } else if (msg.includes('совет') || msg.includes('посоветуй')) {
+                category = 'advice';
+            } else if (msg.includes('люб') || msg.includes('скуч')) {
+                category = 'love';
+            }
+            
+            const responses = aiResponses[category];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Добавить родственника
+        function addRelative() {
+            const name = prompt("Введите имя родственника:");
+            if (!name) return;
+            
+            const relationship = prompt("Кем он/она вам приходится (мама, папа, дедушка и т.д.):", "Родственник");
+            
+            const newRelative = {
+                id: demoRelatives.length + 1,
+                name: name,
+                relationship: relationship || "Родственник",
+                status: "training",
+                initials: name.charAt(0).toUpperCase()
+            };
+            
+            demoRelatives.push(newRelative);
+            loadRelatives();
+            
+            alert(`Профиль "${name}" добавлен! ИИ начал обучение на основе стандартных данных.`);
+            
+            // Авто-сообщение о добавлении
+            setTimeout(() => {
+                addMessage('ai', `Я начал обучение на основе профиля "${name}". Скогда он будет готов к диалогу.`);
+            }, 500);
+        }
+
+        // Начать чат с родственником
+        function startChat(relativeId) {
+            const relative = demoRelatives.find(r => r.id === relativeId);
+            if (!relative) return;
+            
+            addMessage('ai', `Начинаю диалог в стиле ${relative.name}...`);
+            
+            // Изменить тему чата
+            document.querySelector('.demo-section h2').textContent = `💬 Диалог с ${relative.name}`;
+        }
+
+        // Показать инструкции
+        function showInstructions() {
+            const instructions = `
+📚 ИНСТРУКЦИЯ ПО ИСПОЛЬЗОВАНИЮ:
+
+1. ДОБАВЬТЕ РОДСТВЕННИКА
+   - Нажмите "Добавить родственника"
+   - Введите имя и степень родства
+
+2. ОБУЧЕНИЕ ИИ
+   - Система автоматически создает профиль
+   - Обучение занимает несколько минут
+
+3. ДИАЛОГ
+   - Начните общение в демо-чате
+   - Используйте быстрые кнопки для типичных фраз
+
+4. ЭКСПОРТ ДАННЫХ
+   - Сохраните данные в текстовом файле
+   - Резервная копия ваших воспоминаний
+
+⚠️ ПОМНИТЕ: Это ИИ-симуляция, а не настоящее общение.
+            `;
+            
+            alert(instructions);
+        }
+
+        // Экспорт данных
+        function exportData() {
+            const data = {
+                relatives: demoRelatives,
+                exportDate: new Date().toLocaleString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `afterlife-call-data-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            alert('Данные экспортированы в JSON файл!');
+        }
+    </script>
+</body>
+</html>
