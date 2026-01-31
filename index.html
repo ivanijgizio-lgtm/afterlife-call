@@ -37,6 +37,137 @@
             overflow-x: hidden;
         }
 
+        /* Логин страница */
+        .login-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 92, 245, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        }
+
+        .login-container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 60px 40px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .app-logo {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .app-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(138, 92, 245, 0.4);
+        }
+
+        .warning-note {
+            margin-top: 32px;
+            padding: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid var(--danger);
+            text-align: left;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Основное приложение */
         .app-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -45,6 +176,7 @@
             gap: 24px;
             padding: 24px;
             height: 100vh;
+            display: none;
         }
 
         /* Sidebar */
@@ -84,6 +216,41 @@
             background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #3b82f6, var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .user-status {
+            font-size: 12px;
+            color: var(--text-secondary);
         }
 
         .add-relative-btn {
@@ -149,6 +316,14 @@
             font-size: 18px;
             font-weight: 600;
             color: white;
+            position: relative;
+        }
+
+        .relative-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
         }
 
         .relative-info {
@@ -211,6 +386,14 @@
             border-radius: 16px;
             object-fit: cover;
             background: linear-gradient(135deg, #3b82f6, var(--accent));
+            position: relative;
+        }
+
+        .chat-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            object-fit: cover;
         }
 
         .chat-title {
@@ -473,6 +656,13 @@
             border-radius: 8px;
             object-fit: cover;
             background: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .photo-thumb:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .sound-controls {
@@ -741,85 +931,38 @@
             box-shadow: 0 10px 25px rgba(138, 92, 245, 0.3);
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .app-container {
-                grid-template-columns: 250px 1fr;
-            }
-            .right-panel {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .app-container {
-                grid-template-columns: 1fr;
-                padding: 16px;
-                gap: 16px;
-            }
-            .sidebar {
-                display: none;
-            }
-            .chat-header {
-                padding: 16px;
-            }
-            .chat-title {
-                font-size: 20px;
-            }
-            .control-btn {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-card);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-light);
-        }
-
-        /* Audio visualization */
+        /* Audio Visualization */
         .audio-visualizer {
-            display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 100px;
+            height: 80px;
             background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
             z-index: 100;
             pointer-events: none;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2px;
+            padding: 0 20px;
         }
 
         .audio-visualizer.active {
-            display: block;
+            display: flex;
         }
 
         .visualizer-bar {
-            position: absolute;
-            bottom: 0;
-            width: 4px;
-            background: var(--accent);
+            width: 3px;
+            min-height: 10px;
+            background: linear-gradient(to top, var(--accent), var(--accent-light));
             border-radius: 2px 2px 0 0;
-            animation: visualizer 1s infinite alternate;
+            animation: visualizer 1.2s infinite alternate;
         }
 
         @keyframes visualizer {
-            0% { height: 10%; }
-            100% { height: 100%; }
+            0% { height: 10%; opacity: 0.3; }
+            100% { height: 100%; opacity: 1; }
         }
 
         /* Notification */
@@ -879,13 +1022,209 @@
             font-size: 18px;
             padding: 0;
         }
+
+        /* Set Avatar Modal */
+        .avatar-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .avatar-option {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .avatar-option.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(138, 92, 245, 0.3);
+        }
+
+        .avatar-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-option.default {
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .app-container {
+                grid-template-columns: 250px 1fr;
+            }
+            .right-panel {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 40px 24px;
+            }
+            
+            .app-container {
+                grid-template-columns: 1fr;
+                padding: 16px;
+                gap: 16px;
+            }
+            .sidebar {
+                display: none;
+            }
+            .chat-header {
+                padding: 16px;
+            }
+            .chat-title {
+                font-size: 20px;
+            }
+            .control-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+
+        /* Push Notification */
+        .push-notification {
+            position: fixed;
+            top: 80px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .push-notification.active {
+            transform: translateX(0);
+        }
+
+        .push-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .push-content {
+            flex: 1;
+        }
+
+        .push-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .push-message {
+            font-size: 14px;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
-    <!-- Audio Visualizer -->
+    <!-- Логин страница -->
+    <div class="login-page" id="loginPage">
+        <div class="login-container">
+            <div class="app-logo">
+                <i class="fas fa-comments"></i>
+            </div>
+            <h1 class="app-title">Afterlife Call</h1>
+            <p class="app-subtitle">
+                Сохраните память о близких людях. Загрузите фотографии, запишите их манеру речи 
+                и общайтесь через персонализированную ИИ-симуляцию.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3 class="feature-title">Сохранение памяти</h3>
+                    <p class="feature-desc">Фотографии, истории, особенности характера — всё в одном месте</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">ИИ-симуляция</h3>
+                    <p class="feature-desc">Персонализированные ответы на основе загруженных данных</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Иммерсивный опыт</h3>
+                    <p class="feature-desc">Атмосферные звуки и уведомления для полного погружения</p>
+                </div>
+            </div>
+            
+            <button class="login-btn" onclick="enterApp()">
+                <i class="fas fa-sign-in-alt"></i>
+                Войти в приложение
+            </button>
+            
+            <div class="warning-note">
+                <strong>⚠️ Важное напоминание:</strong><br>
+                Это терапевтический инструмент для сохранения памяти. Все диалоги создаются 
+                искусственным интеллектом на основе предоставленной вами информации. 
+                Это не настоящее общение с умершими.
+            </div>
+        </div>
+    </div>
+
+    <!-- Аудио визуализатор -->
     <div class="audio-visualizer" id="audioVisualizer"></div>
 
-    <!-- Notification -->
+    <!-- Уведомления -->
     <div class="notification" id="notification">
         <div class="notification-icon">
             <i class="fas fa-check"></i>
@@ -899,15 +1238,34 @@
         </button>
     </div>
 
-    <!-- Main App Container -->
-    <div class="app-container">
-        <!-- Left Sidebar -->
+    <!-- Push уведомление -->
+    <div class="push-notification" id="pushNotification">
+        <div class="push-avatar" id="pushAvatar"></div>
+        <div class="push-content">
+            <div class="push-name" id="pushName">Имя</div>
+            <div class="push-message" id="pushMessage">Сообщение</div>
+        </div>
+    </div>
+
+    <!-- Основное приложение -->
+    <div class="app-container" id="appContainer">
+        <!-- Левая панель -->
         <div class="sidebar">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-star"></i>
+                    <i class="fas fa-comments"></i>
                 </div>
                 <div class="logo-text">Afterlife</div>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">
+                    U
+                </div>
+                <div>
+                    <div class="user-name" id="userName">Пользователь</div>
+                    <div class="user-status">В сети</div>
+                </div>
             </div>
 
             <button class="add-relative-btn" onclick="showAddRelativeModal()">
@@ -916,16 +1274,16 @@
             </button>
 
             <div class="relatives-list" id="relativesList">
-                <!-- Relatives will be loaded here -->
+                <!-- Родственники будут загружены здесь -->
             </div>
         </div>
 
-        <!-- Main Chat Area -->
+        <!-- Основной чат -->
         <div class="chat-container">
             <div class="chat-header">
                 <div class="chat-header-info">
                     <div class="chat-avatar" id="currentAvatar">
-                        <!-- Avatar will be set here -->
+                        <!-- Аватар будет установлен здесь -->
                     </div>
                     <div>
                         <div class="chat-title" id="currentRelativeName">Выберите близкого</div>
@@ -946,7 +1304,7 @@
             </div>
 
             <div class="messages-container" id="messagesContainer">
-                <!-- Messages will be loaded here -->
+                <!-- Сообщения будут загружены здесь -->
                 <div class="message ai">
                     <div>Привет. Я готов помочь вам сохранить память о вашем близком человеке. Выберите кого-то из списка слева или добавьте нового, чтобы начать диалог.</div>
                     <div class="message-time">Только что</div>
@@ -970,7 +1328,7 @@
             </div>
         </div>
 
-        <!-- Right Panel -->
+        <!-- Правая панель -->
         <div class="right-panel">
             <div class="panel-section">
                 <div class="panel-title">
@@ -986,7 +1344,7 @@
                 </div>
                 <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" onchange="handleFileUpload(event)">
                 <div class="uploaded-photos" id="uploadedPhotos">
-                    <!-- Photos will be loaded here -->
+                    <!-- Фотографии будут загружены здесь -->
                 </div>
             </div>
 
@@ -1069,7 +1427,7 @@
         </div>
     </div>
 
-    <!-- Add Relative Modal -->
+    <!-- Модальные окна -->
     <div class="modal-overlay" id="addRelativeModal">
         <div class="modal">
             <div class="modal-header">
@@ -1105,7 +1463,25 @@
         </div>
     </div>
 
-    <!-- Audio Elements -->
+    <div class="modal-overlay" id="avatarModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Выберите аватар</div>
+                <button class="modal-close" onclick="closeAvatarModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="avatar-options" id="avatarOptions">
+                <!-- Аватары будут загружены здесь -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAvatarModal()">Отмена</button>
+                <button class="btn btn-primary" onclick="setAvatar()">Установить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Аудио элементы -->
     <audio id="rainSound" loop>
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-rain-loop-1243.mp3" type="audio/mpeg">
     </audio>
@@ -1118,9 +1494,19 @@
     <audio id="whitenoiseSound" loop>
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-mysterious-wind-632.mp3" type="audio/mpeg">
     </audio>
+    
+    <!-- Звук уведомления -->
+    <audio id="notificationSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Мягкий звук сообщения -->
+    <audio id="messageSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Demo Data
+        // Демо данные
         const demoRelatives = [
             {
                 id: 1,
@@ -1136,9 +1522,18 @@
                     { text: "Привет, мамуля. Как ты?", sender: "user", time: "10:00" },
                     { text: "Здравствуй, дорогой мой. У меня всё хорошо. Как твои дела? Не перерабатывай, пожалуйста.", sender: "ai", time: "10:02" },
                     { text: "Я стараюсь. Скучаю по твоим пирогам.", sender: "user", time: "10:03" },
-                    { text: "Я тоже скучаю по нашим воскресным чаепитиям. Помнишь, как мы сидели на кухне и обсуждали книги?", sender: "ai", time: "10:04" }
+                    { text: "Я тоже скучаю по нашим воскресным чаепитиям. Помнишь, как мы сидели на кухне и обсуждали книги?", sender: "ai", time: "10:04" },
+                    { text: "Как твоя работа? Ты всё ещё занимаешься тем проектом, о котором рассказывал?", sender: "ai", time: "Вчера 14:30" },
+                    { text: "Да, проект идёт хорошо. Но иногда не хватает твоих советов.", sender: "user", time: "Вчера 14:32" },
+                    { text: "Ты всегда был способным. Помни, что важно не только работать, но и отдыхать.", sender: "ai", time: "Вчера 14:33" }
                 ],
-                photos: []
+                photos: [],
+                personality: {
+                    active: true,
+                    topics: ["работа", "семья", "воспоминания", "советы"],
+                    askQuestions: true,
+                    initiateConversation: true
+                }
             },
             {
                 id: 2,
@@ -1152,42 +1547,149 @@
                 status: "ready",
                 messages: [
                     { text: "Дедуля, как твои рыбалки?", sender: "user", time: "Вчера" },
-                    { text: "О, рыбалка... В наше время мы ходили на озеро с первыми лучами солнца. Помню, как однажды поймал щуку на вот этот старый спиннинг.", sender: "ai", time: "Вчера" }
+                    { text: "О, рыбалка... В наше время мы ходили на озеро с первыми лучами солнца. Помню, как однажды поймал щуку на вот этот старый спиннинг.", sender: "ai", time: "Вчера" },
+                    { text: "Расскажи ещё что-нибудь из своего детства.", sender: "user", time: "2 дня назад" },
+                    { text: "В детстве у нас не было таких игрушек, как сейчас. Мы сами мастерили себе забавы из того, что находили. Это учило нас ценить простые вещи.", sender: "ai", time: "2 дня назад" }
                 ],
-                photos: []
+                photos: [],
+                personality: {
+                    active: true,
+                    topics: ["рыбалка", "детство", "истории", "советы"],
+                    askQuestions: true,
+                    initiateConversation: true
+                }
             }
         ];
 
-        // Current State
+        // Текущее состояние
         let currentRelativeId = null;
         let activeSound = null;
         let isVoiceActive = false;
         let isVideoActive = false;
         let messagesCount = 0;
-        let uploadedPhotos = [];
+        let selectedAvatar = null;
+        let userData = {
+            name: "Алексей",
+            avatar: "U"
+        };
+        
+        // База ответов ИИ
+        const aiResponseDatabase = {
+            greetings: [
+                "Привет, дорогой. Как твои дела?",
+                "Здравствуй, я рад(а) тебя слышать.",
+                "Добрый день. Как прошёл твой день?",
+                "Приветствую тебя. Что нового?",
+                "Здравствуй, мой любимый."
+            ],
+            
+            questions: [
+                "Как твоя работа? Всё идёт по плану?",
+                "Ты хорошо спишь? Высыпаешься?",
+                "Как здоровье? Не забываешь про врачей?",
+                "Что интересного произошло за последнее время?",
+                "Ты скучаешь по нашим разговорам?",
+                "Как твои друзья? Часто видишься с ними?",
+                "Ты нашёл время для своих увлечений?",
+                "Что читаешь или смотришь в последнее время?",
+                "Как погода у вас? У нас всегда прекрасно.",
+                "Ты помнишь наш последний совместный праздник?"
+            ],
+            
+            memories: [
+                "Помню, как мы вместе... Это было прекрасное время.",
+                "Ах, те воспоминания... Они согревают меня до сих пор.",
+                "Да, я хорошо помню тот день. Мы были так счастливы.",
+                "Это одно из моих самых тёплых воспоминаний.",
+                "Как будто это было вчера... Время летит так быстро."
+            ],
+            
+            advice: [
+                "Главное - будь счастлив и береги близких.",
+                "Не бойся следовать за своей мечтой.",
+                "Помни, что трудности временны, а любовь вечна.",
+                "Цени каждый момент, время так быстротечно.",
+                "Будь добр к себе и окружающим.",
+                "Не откладывай на завтра то, что можно сделать сегодня.",
+                "Слушай своё сердце, оно знает правильный путь.",
+                "Иногда нужно просто остановиться и посмотреть вокруг.",
+                "Не бойся просить помощи, когда это нужно."
+            ],
+            
+            love: [
+                "Я всегда буду любить тебя.",
+                "Моя любовь к тебе бесконечна.",
+                "Ты всегда в моём сердце.",
+                "Я скучаю по тебе каждый день.",
+                "Ты - самое дорогое, что у меня было.",
+                "Моя любовь к тебе не знает границ."
+            ],
+            
+            support: [
+                "Я всегда рядом, даже если ты меня не видишь.",
+                "Ты не одинок, я всегда с тобой.",
+                "Я горжусь тобой и тем, кем ты стал.",
+                "Ты сильнее, чем думаешь.",
+                "Всё будет хорошо, я верю в тебя."
+            ]
+        };
 
-        // Initialize
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            loadRelatives();
-            updateStats();
+            // Загрузка данных из localStorage
+            loadUserData();
+            
+            // Инициализация визуализатора звука
             createVisualizer();
             
-            // Auto-resize textarea
+            // Установка события для автоподбора высоты textarea
             const textarea = document.getElementById('messageInput');
             textarea.addEventListener('input', function() {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
             });
             
-            // Load demo conversation
+            // Загрузка демо беседы
             if (demoRelatives.length > 0) {
                 setTimeout(() => {
                     switchRelative(demoRelatives[0].id);
                 }, 1000);
             }
+            
+            // Запуск таймера для активности ИИ
+            startAITimer();
         });
 
-        // Load relatives list
+        // Вход в приложение
+        function enterApp() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'grid';
+            
+            // Загрузка родственников
+            loadRelatives();
+            
+            // Обновление статистики
+            updateStats();
+            
+            // Приветственное уведомление
+            setTimeout(() => {
+                showPushNotification("Система", "Добро пожаловать в Afterlife Call");
+                playSound('notificationSound');
+            }, 500);
+        }
+
+        // Загрузка данных пользователя
+        function loadUserData() {
+            const savedData = localStorage.getItem('afterlifeUserData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+            }
+            
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userAvatar').textContent = userData.avatar;
+        }
+
+        // Загрузка списка родственников
         function loadRelatives() {
             const list = document.getElementById('relativesList');
             list.innerHTML = '';
@@ -1196,9 +1698,16 @@
                 const item = document.createElement('div');
                 item.className = `relative-item ${currentRelativeId === relative.id ? 'active' : ''}`;
                 item.onclick = () => switchRelative(relative.id);
+                
+                // Проверяем, есть ли загруженные фото для аватара
+                let avatarContent = relative.avatarInitial;
+                if (relative.photos.length > 0) {
+                    avatarContent = `<img src="${relative.photos[0].url}" alt="${relative.name}">`;
+                }
+                
                 item.innerHTML = `
                     <div class="relative-avatar" style="background: ${relative.avatarColor}">
-                        ${relative.avatarInitial}
+                        ${avatarContent}
                     </div>
                     <div class="relative-info">
                         <div class="relative-name">${relative.name}</div>
@@ -1212,39 +1721,58 @@
             });
         }
 
-        // Switch to different relative
+        // Переключение на другого родственника
         function switchRelative(id) {
             currentRelativeId = id;
             const relative = demoRelatives.find(r => r.id === id);
             
             if (!relative) return;
             
-            // Update UI
+            // Обновление UI
             document.querySelectorAll('.relative-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            document.querySelector(`.relative-item:nth-child(${demoRelatives.findIndex(r => r.id === id) + 1})`).classList.add('active');
+            const relativeIndex = demoRelatives.findIndex(r => r.id === id);
+            if (relativeIndex >= 0) {
+                document.querySelector(`.relative-item:nth-child(${relativeIndex + 1})`).classList.add('active');
+            }
             
-            // Update chat header
+            // Обновление заголовка чата
             document.getElementById('currentRelativeName').textContent = relative.name;
             document.getElementById('currentRelativeStatus').textContent = relative.relationship;
-            document.getElementById('currentAvatar').innerHTML = relative.avatarInitial;
-            document.getElementById('currentAvatar').style.background = relative.avatarColor;
             
-            // Load messages
+            // Обновление аватара
+            const avatarElement = document.getElementById('currentAvatar');
+            if (relative.photos.length > 0) {
+                avatarElement.innerHTML = `<img src="${relative.photos[0].url}" alt="${relative.name}">`;
+            } else {
+                avatarElement.innerHTML = relative.avatarInitial;
+                avatarElement.style.background = relative.avatarColor;
+            }
+            
+            // Загрузка сообщений
             loadMessages(relative.messages);
             
-            // Load photos
+            // Загрузка фотографий
             loadPhotos(relative.photos);
             
-            // Update stats
+            // Обновление статистики
             updateStats();
             
+            // Уведомление
             showNotification('Диалог открыт', `Теперь вы общаетесь с ${relative.name}`);
+            playSound('messageSound');
+            
+            // Возможность активности ИИ
+            if (relative.personality.initiateConversation && Math.random() > 0.5) {
+                setTimeout(() => {
+                    initiateAIConversation(relative);
+                }, 3000);
+            }
         }
 
-        // Load messages
+        // Загрузка сообщений
         function loadMessages(messages) {
             const container = document.getElementById('messagesContainer');
             container.innerHTML = '';
@@ -1259,15 +1787,15 @@
                 container.appendChild(messageDiv);
             });
             
-            // Scroll to bottom
+            // Прокрутка вниз
             container.scrollTop = container.scrollHeight;
             
-            // Update message count
+            // Обновление счётчика сообщений
             messagesCount = messages.length;
             document.getElementById('totalMessages').textContent = messagesCount;
         }
 
-        // Send message
+        // Отправка сообщения
         function sendMessage() {
             const input = document.getElementById('messageInput');
             const message = input.value.trim();
@@ -1280,7 +1808,7 @@
             const relative = demoRelatives.find(r => r.id === currentRelativeId);
             if (!relative) return;
             
-            // Add user message
+            // Добавление сообщения пользователя
             const userMessage = {
                 text: message,
                 sender: 'user',
@@ -1289,80 +1817,74 @@
             
             relative.messages.push(userMessage);
             
-            // Clear input
+            // Очистка ввода
             input.value = '';
             input.style.height = 'auto';
             
-            // Update UI
+            // Обновление UI
             loadMessages(relative.messages);
             
-            // Show typing indicator
+            // Показать индикатор набора
             showTypingIndicator();
             
-            // Generate AI response after delay
+            // Генерация ответа ИИ с задержкой
             setTimeout(() => {
                 generateAIResponse(relative, message);
             }, 1000 + Math.random() * 1500);
             
-            // Update stats
+            // Обновление статистики
             updateStats();
         }
 
-        // Generate AI response
+        // Показать индикатор набора
+        function showTypingIndicator() {
+            const container = document.getElementById('messagesContainer');
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.innerHTML = '<span></span><span></span><span></span>';
+            container.appendChild(indicator);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Генерация ответа ИИ
         function generateAIResponse(relative, userMessage) {
-            // Remove typing indicator
+            // Удаление индикатора набора
             document.querySelector('.typing-indicator')?.remove();
             
-            // Demo responses based on relative
-            let responses = [];
-            
-            if (relative.name === "Мария") {
-                responses = [
-                    "Дорогой мой, я так рада твоему сообщению.",
-                    "Всё будет хорошо, не переживай так.",
-                    "Помнишь, как мы вместе читали книжки вечерами?",
-                    "Ты всегда был таким внимательным. Горжусь тобой.",
-                    "Не забывай кушать вовремя. Здоровье - это самое важное.",
-                    "Как твоя работа? Не слишком ли ты устаёшь?",
-                    "Я всегда с тобой, даже если тебе кажется иначе."
-                ];
-            } else if (relative.name === "Александр") {
-                responses = [
-                    "В наше время мы ценили каждое мгновение.",
-                    "Помню, как мы ходили на рыбалку на рассвете.",
-                    "Жизнь - это как река, всё течёт, всё меняется.",
-                    "Главное - оставаться честным с собой и другими.",
-                    "Учись на ошибках, но не зацикливайся на них.",
-                    "Природа - лучший учитель. Прислушивайся к ней.",
-                    "Сила в спокойствии. Не торопись с выводами."
-                ];
-            } else {
-                responses = [
-                    "Я слышу тебя. Продолжай, пожалуйста.",
-                    "Это очень важно. Расскажи мне больше.",
-                    "Я здесь, чтобы поддержать тебя.",
-                    "Память о хороших моментах помогает жить дальше.",
-                    "Ты не одинок. Я всегда рядом.",
-                    "Что ты чувствуешь, когда об этом думаешь?",
-                    "Давай поговорим об этом подробнее."
-                ];
-            }
-            
-            // Add personalized response based on user message
+            let responseText = '';
             const messageLower = userMessage.toLowerCase();
             
-            if (messageLower.includes('скучаю') || messageLower.includes('miss')) {
-                responses = ["Я тоже скучаю по тебе. Но память соединяет нас."];
-            } else if (messageLower.includes('люблю') || messageLower.includes('love')) {
-                responses = ["Любовь не знает границ. Я всегда буду любить тебя."];
-            } else if (messageLower.includes('помнишь') || messageLower.includes('remember')) {
-                responses = ["Конечно помню. Эти воспоминания драгоценны для меня."];
-            } else if (messageLower.includes('совет') || messageLower.includes('advice')) {
-                responses = ["Слушай своё сердце. Оно знает правильный путь."];
+            // Определение категории сообщения
+            if (messageLower.includes('привет') || messageLower.includes('здравств') || messageLower.includes('добрый')) {
+                responseText = getRandomResponse('greetings');
+            } else if (messageLower.includes('помни') || messageLower.includes('вспомни') || messageLower.includes('памят')) {
+                responseText = getRandomResponse('memories');
+            } else if (messageLower.includes('совет') || messageLower.includes('посоветуй') || messageLower.includes('что делать')) {
+                responseText = getRandomResponse('advice');
+            } else if (messageLower.includes('люб') || messageLower.includes('скуч') || messageLower.includes('мисс')) {
+                responseText = getRandomResponse('love');
+            } else if (messageLower.includes('спасибо') || messageLower.includes('благодар')) {
+                responseText = "Всегда пожалуйста, дорогой. Я всегда здесь для тебя.";
+            } else {
+                // Случайный ответ с возможностью задать вопрос
+                if (relative.personality.askQuestions && Math.random() > 0.5) {
+                    responseText = getRandomResponse('questions');
+                } else {
+                    responseText = getRandomResponse('support');
+                }
             }
             
-            // Select random response
-            const responseText = responses[Math.floor(Math.random() * responses.length)];
+            // Персонализация ответа
+            if (relative.name === "Мария") {
+                responseText = responseText.replace(/дорогой/g, 'дорогой мой');
+                if (Math.random() > 0.7) {
+                    responseText += " Не забывай кушать вовремя.";
+                }
+            } else if (relative.name === "Александр") {
+                if (Math.random() > 0.7) {
+                    responseText = "В наше время... " + responseText;
+                }
+            }
             
             const aiMessage = {
                 text: responseText,
@@ -1373,23 +1895,58 @@
             relative.messages.push(aiMessage);
             loadMessages(relative.messages);
             
-            // Play notification sound if voice is active
+            // Проиграть звук уведомления
+            playSound('messageSound');
+            
+            // Показать push-уведомление
             if (isVoiceActive) {
-                playNotificationSound();
+                showPushNotification(relative.name, responseText.substring(0, 50) + "...");
+            }
+            
+            // Обновление статистики
+            updateStats();
+        }
+
+        // Получить случайный ответ из базы
+        function getRandomResponse(category) {
+            const responses = aiResponseDatabase[category];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Инициация разговора ИИ
+        function initiateAIConversation(relative) {
+            if (relative.messages.length === 0 || Math.random() > 0.7) {
+                const questions = aiResponseDatabase.questions;
+                const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+                
+                const aiMessage = {
+                    text: randomQuestion,
+                    sender: 'ai',
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                
+                relative.messages.push(aiMessage);
+                loadMessages(relative.messages);
+                
+                // Уведомление
+                showPushNotification(relative.name, randomQuestion.substring(0, 50) + "...");
+                playSound('messageSound');
             }
         }
 
-        // Show typing indicator
-        function showTypingIndicator() {
-            const container = document.getElementById('messagesContainer');
-            const indicator = document.createElement('div');
-            indicator.className = 'typing-indicator';
-            indicator.innerHTML = '<span></span><span></span><span></span>';
-            container.appendChild(indicator);
-            container.scrollTop = container.scrollHeight;
+        // Таймер активности ИИ
+        function startAITimer() {
+            setInterval(() => {
+                if (currentRelativeId) {
+                    const relative = demoRelatives.find(r => r.id === currentRelativeId);
+                    if (relative && relative.personality.active && Math.random() > 0.9) {
+                        initiateAIConversation(relative);
+                    }
+                }
+            }, 60000); // Проверка каждую минуту
         }
 
-        // Handle file upload
+        // Обработка загрузки файлов
         function handleFileUpload(event) {
             const files = event.target.files;
             if (!files.length) return;
@@ -1410,23 +1967,34 @@
                         id: Date.now() + i,
                         url: e.target.result,
                         name: file.name,
-                        date: new Date().toLocaleDateString()
+                        date: new Date().toLocaleDateString(),
+                        size: file.size
                     };
                     
                     relative.photos.push(photoData);
                     loadPhotos(relative.photos);
                     updateStats();
                     
+                    // Предложить установить как аватар
+                    if (relative.photos.length === 1) {
+                        setTimeout(() => {
+                            if (confirm(`Установить фото "${file.name}" как аватар для ${relative.name}?`)) {
+                                showAvatarModal(relative);
+                            }
+                        }, 500);
+                    }
+                    
                     showNotification('Фото загружено', `Фотография "${file.name}" добавлена`);
+                    playSound('notificationSound');
                 };
                 reader.readAsDataURL(file);
             }
             
-            // Reset file input
+            // Сброс ввода файла
             event.target.value = '';
         }
 
-        // Load photos
+        // Загрузка фотографий
         function loadPhotos(photos) {
             const container = document.getElementById('uploadedPhotos');
             container.innerHTML = '';
@@ -1447,48 +2015,54 @@
             });
         }
 
-        // View photo in modal (simplified)
+        // Просмотр фото
         function viewPhoto(photo) {
             showNotification('Просмотр фото', `Открыто фото: ${photo.name}`);
-            // In a real app, you would show a modal with full-size image
+            // В реальном приложении здесь можно показать модальное окно с фото
         }
 
-        // Sound controls
+        // Управление звуками
         function toggleSound(soundType) {
             const audio = document.getElementById(soundType + 'Sound');
             const toggle = document.getElementById(soundType + 'Toggle');
             
-            // Stop currently active sound
+            // Остановить текущий звук
             if (activeSound && activeSound !== audio) {
                 activeSound.pause();
                 activeSound.currentTime = 0;
-                document.getElementById(activeSound.id.replace('Sound', 'Toggle')).classList.remove('active');
+                const prevToggle = document.getElementById(activeSound.id.replace('Sound', 'Toggle'));
+                if (prevToggle) prevToggle.classList.remove('active');
             }
             
             if (activeSound === audio && !audio.paused) {
-                // Pause current sound
+                // Пауза текущего звука
                 audio.pause();
                 toggle.classList.remove('active');
                 activeSound = null;
                 document.getElementById('audioVisualizer').classList.remove('active');
             } else {
-                // Play sound
+                // Воспроизведение звука
                 audio.volume = document.getElementById('volumeSlider').value / 100;
-                audio.play();
+                audio.play().catch(e => {
+                    console.log("Аудио не может быть воспроизведено:", e);
+                    showNotification('Ошибка', 'Не удалось воспроизвести звук');
+                });
                 toggle.classList.add('active');
                 activeSound = audio;
                 document.getElementById('audioVisualizer').classList.add('active');
+                
+                showNotification('Атмосфера', `Включен звук: ${soundType}`);
             }
         }
 
-        // Update volume
+        // Обновление громкости
         function updateVolume(value) {
             if (activeSound) {
                 activeSound.volume = value / 100;
             }
         }
 
-        // Toggle voice
+        // Переключение голоса
         function toggleVoice() {
             isVoiceActive = !isVoiceActive;
             const btn = document.getElementById('voiceToggle');
@@ -1496,13 +2070,13 @@
             
             if (isVoiceActive) {
                 showNotification('Голос активирован', 'Теперь вы будете получать голосовые уведомления');
-                playNotificationSound();
+                playSound('notificationSound');
             } else {
                 showNotification('Голос отключен', 'Голосовые уведомления выключены');
             }
         }
 
-        // Toggle video
+        // Переключение видео
         function toggleVideo() {
             isVideoActive = !isVideoActive;
             const btn = document.getElementById('videoToggle');
@@ -1514,26 +2088,28 @@
             );
         }
 
-        // Play notification sound
-        function playNotificationSound() {
-            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
-            audio.volume = 0.3;
-            audio.play();
+        // Проиграть звук
+        function playSound(soundId) {
+            const audio = document.getElementById(soundId);
+            if (audio) {
+                audio.currentTime = 0;
+                audio.volume = 0.3;
+                audio.play().catch(e => console.log("Звук не может быть воспроизведен:", e));
+            }
         }
 
-        // Create audio visualizer
+        // Создать визуализатор звука
         function createVisualizer() {
             const visualizer = document.getElementById('audioVisualizer');
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 const bar = document.createElement('div');
                 bar.className = 'visualizer-bar';
-                bar.style.left = `${i * 2}%`;
                 bar.style.animationDelay = `${i * 0.05}s`;
                 visualizer.appendChild(bar);
             }
         }
 
-        // Update statistics
+        // Обновление статистики
         function updateStats() {
             const relative = demoRelatives.find(r => r.id === currentRelativeId);
             
@@ -1542,13 +2118,13 @@
                 document.getElementById('photosCount').textContent = relative.photos.length;
                 document.getElementById('memoriesCount').textContent = Math.floor(relative.messages.length / 2);
                 
-                // Calculate conversation days (demo)
+                // Расчет дней общения (демо)
                 const days = Math.max(1, Math.floor(relative.messages.length / 3));
                 document.getElementById('conversationDays').textContent = days;
             }
         }
 
-        // Show notification
+        // Показать уведомление
         function showNotification(title, message) {
             const notification = document.getElementById('notification');
             document.getElementById('notificationTitle').textContent = title;
@@ -1561,11 +2137,37 @@
             }, 4000);
         }
 
+        // Скрыть уведомление
         function hideNotification() {
             document.getElementById('notification').classList.remove('active');
         }
 
-        // Modal functions
+        // Показать push-уведомление
+        function showPushNotification(name, message) {
+            const push = document.getElementById('pushNotification');
+            document.getElementById('pushName').textContent = name;
+            document.getElementById('pushMessage').textContent = message;
+            
+            // Установка аватара
+            const pushAvatar = document.getElementById('pushAvatar');
+            const relative = demoRelatives.find(r => r.name === name);
+            if (relative) {
+                if (relative.photos.length > 0) {
+                    pushAvatar.innerHTML = `<img src="${relative.photos[0].url}" alt="${name}" style="width:100%;height:100%;border-radius:10px;object-fit:cover">`;
+                } else {
+                    pushAvatar.textContent = relative.avatarInitial;
+                    pushAvatar.style.background = relative.avatarColor;
+                }
+            }
+            
+            push.classList.add('active');
+            
+            setTimeout(() => {
+                push.classList.remove('active');
+            }, 5000);
+        }
+
+        // Модальные окна
         function showAddRelativeModal() {
             document.getElementById('addRelativeModal').classList.add('active');
         }
@@ -1574,6 +2176,75 @@
             document.getElementById('addRelativeModal').classList.remove('active');
         }
 
+        // Показать модальное окно выбора аватара
+        function showAvatarModal(relative) {
+            selectedAvatar = null;
+            const options = document.getElementById('avatarOptions');
+            options.innerHTML = '';
+            
+            // Добавить стандартный аватар
+            const defaultOption = document.createElement('div');
+            defaultOption.className = 'avatar-option default';
+            defaultOption.textContent = relative.avatarInitial;
+            defaultOption.onclick = () => selectAvatar(null);
+            options.appendChild(defaultOption);
+            
+            // Добавить загруженные фото
+            relative.photos.forEach((photo, index) => {
+                const option = document.createElement('div');
+                option.className = 'avatar-option';
+                option.innerHTML = `<img src="${photo.url}" alt="Фото ${index + 1}">`;
+                option.onclick = () => selectAvatar(photo.url);
+                options.appendChild(option);
+            });
+            
+            document.getElementById('avatarModal').classList.add('active');
+        }
+
+        function closeAvatarModal() {
+            document.getElementById('avatarModal').classList.remove('active');
+        }
+
+        // Выбор аватара
+        function selectAvatar(url) {
+            selectedAvatar = url;
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.avatar-option').classList.add('selected');
+        }
+
+        // Установка аватара
+        function setAvatar() {
+            if (selectedAvatar === null) return;
+            
+            const relative = demoRelatives.find(r => r.id === currentRelativeId);
+            if (!relative) return;
+            
+            // Обновление аватара в чате
+            const avatarElement = document.getElementById('currentAvatar');
+            if (selectedAvatar) {
+                avatarElement.innerHTML = `<img src="${selectedAvatar}" alt="${relative.name}">`;
+            } else {
+                avatarElement.innerHTML = relative.avatarInitial;
+                avatarElement.style.background = relative.avatarColor;
+            }
+            
+            // Обновление аватара в списке
+            const relativeItem = document.querySelector(`.relative-item.active .relative-avatar`);
+            if (relativeItem) {
+                if (selectedAvatar) {
+                    relativeItem.innerHTML = `<img src="${selectedAvatar}" alt="${relative.name}">`;
+                } else {
+                    relativeItem.innerHTML = relative.avatarInitial;
+                }
+            }
+            
+            closeAvatarModal();
+            showNotification('Аватар обновлён', `Аватар для ${relative.name} установлен`);
+        }
+
+        // Сохранение родственника
         function saveRelative() {
             const name = document.getElementById('relativeName').value.trim();
             const relationship = document.getElementById('relativeRelationship').value.trim();
@@ -1583,7 +2254,7 @@
                 return;
             }
             
-            // Generate random color for avatar
+            // Генерация случайного цвета для аватара
             const colors = ['#8a5cf5', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#6366f1'];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             
@@ -1604,14 +2275,20 @@
                         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                     }
                 ],
-                photos: []
+                photos: [],
+                personality: {
+                    active: true,
+                    topics: ["семья", "воспоминания", "советы"],
+                    askQuestions: true,
+                    initiateConversation: true
+                }
             };
             
             demoRelatives.push(newRelative);
             loadRelatives();
             closeAddRelativeModal();
             
-            // Clear form
+            // Очистка формы
             document.getElementById('relativeName').value = '';
             document.getElementById('relativeRelationship').value = '';
             document.getElementById('relativeBirthDate').value = '';
@@ -1619,12 +2296,13 @@
             document.getElementById('relativeBio').value = '';
             
             showNotification('Успешно', `Профиль ${name} создан`);
+            playSound('notificationSound');
             
-            // Switch to new relative
+            // Переключение на нового родственника
             setTimeout(() => switchRelative(newRelative.id), 500);
         }
 
-        // Export conversation
+        // Экспорт беседы
         function exportConversation() {
             if (!currentRelativeId) {
                 showNotification('Ошибка', 'Сначала выберите диалог');
@@ -1649,10 +2327,10 @@
             link.download = `afterlife-call-${relative.name.toLowerCase()}-${new Date().toISOString().split('T')[0]}.json`;
             link.click();
             
-            showNotification('Экспорт завершен', `Диалог с ${relative.name} сохранен`);
+            showNotification('Экспорт завершён', `Диалог с ${relative.name} сохранён`);
         }
 
-        // Utility functions
+        // Утилиты
         function autoResize(textarea) {
             textarea.style.height = 'auto';
             textarea.style.height = (textarea.scrollHeight) + 'px';
@@ -1664,40 +2342,6 @@
                 sendMessage();
             }
         }
-
-        // Demo auto-reply after 10 seconds of inactivity
-        let inactivityTimer;
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            inactivityTimer = setTimeout(() => {
-                if (currentRelativeId && Math.random() > 0.7) {
-                    const relative = demoRelatives.find(r => r.id === currentRelativeId);
-                    if (relative && relative.messages.length > 0) {
-                        const demoMessages = [
-                            "Я думаю о тебе. Как твои дела?",
-                            "Помнишь наш последний разговор?",
-                            "Время летит так быстро...",
-                            "Я всегда рядом, даже если ты меня не видишь."
-                        ];
-                        
-                        const randomMessage = demoMessages[Math.floor(Math.random() * demoMessages.length)];
-                        relative.messages.push({
-                            text: randomMessage,
-                            sender: 'ai',
-                            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                        });
-                        
-                        loadMessages(relative.messages);
-                        showNotification(relative.name, randomMessage);
-                    }
-                }
-            }, 10000); // 10 seconds
-        }
-
-        // Reset timer on user activity
-        document.addEventListener('click', resetInactivityTimer);
-        document.addEventListener('keypress', resetInactivityTimer);
-        resetInactivityTimer();
     </script>
 </body>
 </html>
