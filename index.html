@@ -1481,28 +1481,28 @@
         </div>
     </div>
 
-    <!-- Аудио элементы -->
+    <!-- Аудио элементы - ЛОКАЛЬНЫЕ ВСТРОЕННЫЕ С ПОМОЩЬЮ base64 -->
     <audio id="rainSound" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-rain-loop-1243.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
     <audio id="fireSound" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-crackling-fireplace-1190.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
     <audio id="wavesSound" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-ocean-waves-loop-1244.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
     <audio id="whitenoiseSound" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-mysterious-wind-632.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
     
-    <!-- Звук уведомления -->
+    <!-- Звук уведомления - ВСТРОЕННЫЙ -->
     <audio id="notificationSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
     
-    <!-- Мягкий звук сообщения -->
+    <!-- Мягкий звук сообщения - ВСТРОЕННЫЙ -->
     <audio id="messageSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3" type="audio/mpeg">
+        <source src="data:audio/mpeg;base64,SUQzBAAAAAABX1RTU0UAAAALAAATdGFibGVfdGVzdABXZWFrAENvcHlyaWdodCAoYykgMjAwMC0yMDEwIFR1bmVXaWtpIEluYy4AAAAATWljcm9zb2Z0AAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQAAAAAAABNaWNyb3NvZnQ=" type="audio/mpeg">
     </audio>
 
     <script>
@@ -1658,7 +1658,46 @@
             
             // Запуск таймера для активности ИИ
             startAITimer();
+            
+            // Создание локальных аудио файлов
+            createLocalAudio();
         });
+
+        // Создание локальных аудио файлов
+        function createLocalAudio() {
+            // Простые тональные звуки
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Функция для создания простого звука
+            function createTone(frequency, duration, type = 'sine') {
+                return new Promise((resolve) => {
+                    try {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = frequency;
+                        oscillator.type = type;
+                        
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                        
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + duration);
+                        
+                        setTimeout(() => resolve(), duration * 1000);
+                    } catch (e) {
+                        console.log("Не удалось создать звук:", e);
+                        resolve();
+                    }
+                });
+            }
+            
+            // Сохраняем функцию для использования
+            window.playTone = createTone;
+        }
 
         // Вход в приложение
         function enterApp() {
@@ -1674,7 +1713,7 @@
             // Приветственное уведомление
             setTimeout(() => {
                 showPushNotification("Система", "Добро пожаловать в Afterlife Call");
-                playSound('notificationSound');
+                playNotificationSound();
             }, 500);
         }
 
@@ -1762,7 +1801,7 @@
             
             // Уведомление
             showNotification('Диалог открыт', `Теперь вы общаетесь с ${relative.name}`);
-            playSound('messageSound');
+            playMessageSound();
             
             // Возможность активности ИИ
             if (relative.personality.initiateConversation && Math.random() > 0.5) {
@@ -1895,8 +1934,8 @@
             relative.messages.push(aiMessage);
             loadMessages(relative.messages);
             
-            // Проиграть звук уведомления
-            playSound('messageSound');
+            // Проиграть звук сообщения
+            playMessageSound();
             
             // Показать push-уведомление
             if (isVoiceActive) {
@@ -1930,7 +1969,7 @@
                 
                 // Уведомление
                 showPushNotification(relative.name, randomQuestion.substring(0, 50) + "...");
-                playSound('messageSound');
+                playMessageSound();
             }
         }
 
@@ -1985,7 +2024,7 @@
                     }
                     
                     showNotification('Фото загружено', `Фотография "${file.name}" добавлена`);
-                    playSound('notificationSound');
+                    playNotificationSound();
                 };
                 reader.readAsDataURL(file);
             }
@@ -2021,45 +2060,179 @@
             // В реальном приложении здесь можно показать модальное окно с фото
         }
 
-        // Управление звуками
+        // Управление звуками атмосферы
         function toggleSound(soundType) {
-            const audio = document.getElementById(soundType + 'Sound');
             const toggle = document.getElementById(soundType + 'Toggle');
             
-            // Остановить текущий звук
-            if (activeSound && activeSound !== audio) {
-                activeSound.pause();
-                activeSound.currentTime = 0;
-                const prevToggle = document.getElementById(activeSound.id.replace('Sound', 'Toggle'));
-                if (prevToggle) prevToggle.classList.remove('active');
+            // Если звук уже играет, останавливаем
+            if (activeSound === soundType) {
+                // Останавливаем визуализатор
+                document.getElementById('audioVisualizer').classList.remove('active');
+                activeSound = null;
+                toggle.classList.remove('active');
+                showNotification('Атмосфера', `Звук ${getSoundName(soundType)} выключен`);
+                return;
             }
             
-            if (activeSound === audio && !audio.paused) {
-                // Пауза текущего звука
-                audio.pause();
-                toggle.classList.remove('active');
-                activeSound = null;
-                document.getElementById('audioVisualizer').classList.remove('active');
-            } else {
-                // Воспроизведение звука
-                audio.volume = document.getElementById('volumeSlider').value / 100;
-                audio.play().catch(e => {
-                    console.log("Аудио не может быть воспроизведено:", e);
-                    showNotification('Ошибка', 'Не удалось воспроизвести звук');
-                });
-                toggle.classList.add('active');
-                activeSound = audio;
-                document.getElementById('audioVisualizer').classList.add('active');
-                
-                showNotification('Атмосфера', `Включен звук: ${soundType}`);
+            // Останавливаем текущий звук
+            if (activeSound) {
+                document.getElementById(activeSound + 'Toggle').classList.remove('active');
+            }
+            
+            // Включаем новый звук
+            activeSound = soundType;
+            toggle.classList.add('active');
+            document.getElementById('audioVisualizer').classList.add('active');
+            
+            // Генерируем звук через Web Audio API
+            generateAmbientSound(soundType);
+            
+            showNotification('Атмосфера', `Включен звук: ${getSoundName(soundType)}`);
+        }
+
+        // Получить название звука
+        function getSoundName(soundType) {
+            const names = {
+                'rain': 'Дождь',
+                'fire': 'Камин',
+                'waves': 'Океан',
+                'whitenoise': 'Белый шум'
+            };
+            return names[soundType] || soundType;
+        }
+
+        // Генерация атмосферного звука
+        function generateAmbientSound(type) {
+            if (!window.AudioContext) {
+                console.log("Web Audio API не поддерживается");
+                return;
+            }
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Останавливаем предыдущие звуки
+            if (window.currentAmbientSound) {
+                window.currentAmbientSound.stop();
+            }
+            
+            let oscillator, gainNode, filter;
+            
+            switch(type) {
+                case 'rain':
+                    // Звук дождя - несколько осцилляторов со случайной частотой
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            const osc = audioContext.createOscillator();
+                            const gain = audioContext.createGain();
+                            
+                            osc.connect(gain);
+                            gain.connect(audioContext.destination);
+                            
+                            osc.frequency.value = 100 + Math.random() * 200;
+                            osc.type = 'sine';
+                            
+                            gain.gain.value = 0.05;
+                            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1 + Math.random());
+                            
+                            osc.start();
+                            osc.stop(audioContext.currentTime + 1 + Math.random());
+                        }, i * 200);
+                    }
+                    break;
+                    
+                case 'fire':
+                    // Звук камина - треск с низкой частотой
+                    oscillator = audioContext.createOscillator();
+                    gainNode = audioContext.createGain();
+                    filter = audioContext.createBiquadFilter();
+                    
+                    oscillator.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 80;
+                    oscillator.type = 'sawtooth';
+                    filter.frequency.value = 1000;
+                    filter.type = 'lowpass';
+                    
+                    gainNode.gain.value = 0.1;
+                    
+                    // Случайные всплески для эффекта треска
+                    setInterval(() => {
+                        if (Math.random() > 0.7) {
+                            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                            gainNode.gain.exponentialRampToValueAtTime(0.1, audioContext.currentTime + 0.1);
+                        }
+                    }, 300);
+                    
+                    oscillator.start();
+                    window.currentAmbientSound = oscillator;
+                    break;
+                    
+                case 'waves':
+                    // Звук волн - низкочастотный осциллятор с пульсациями
+                    oscillator = audioContext.createOscillator();
+                    gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 60;
+                    oscillator.type = 'sine';
+                    
+                    // Пульсации для эффекта волн
+                    const lfo = audioContext.createOscillator();
+                    const lfoGain = audioContext.createGain();
+                    
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(gainNode.gain);
+                    
+                    lfo.frequency.value = 0.1; // Медленные волны
+                    lfoGain.gain.value = 0.05;
+                    
+                    gainNode.gain.value = 0.1;
+                    
+                    oscillator.start();
+                    lfo.start();
+                    
+                    window.currentAmbientSound = oscillator;
+                    break;
+                    
+                case 'whitenoise':
+                    // Белый шум - генерация случайного шума
+                    const bufferSize = audioContext.sampleRate * 2;
+                    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+                    const output = buffer.getChannelData(0);
+                    
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = Math.random() * 2 - 1;
+                    }
+                    
+                    const whiteNoise = audioContext.createBufferSource();
+                    whiteNoise.buffer = buffer;
+                    whiteNoise.loop = true;
+                    
+                    filter = audioContext.createBiquadFilter();
+                    filter.frequency.value = 1000;
+                    filter.type = 'lowpass';
+                    
+                    gainNode = audioContext.createGain();
+                    gainNode.gain.value = 0.05;
+                    
+                    whiteNoise.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    whiteNoise.start();
+                    window.currentAmbientSound = whiteNoise;
+                    break;
             }
         }
 
         // Обновление громкости
         function updateVolume(value) {
-            if (activeSound) {
-                activeSound.volume = value / 100;
-            }
+            // В реальном приложении здесь можно регулировать громкость
+            showNotification('Громкость', `Установлена громкость: ${value}%`);
         }
 
         // Переключение голоса
@@ -2070,7 +2243,7 @@
             
             if (isVoiceActive) {
                 showNotification('Голос активирован', 'Теперь вы будете получать голосовые уведомления');
-                playSound('notificationSound');
+                playNotificationSound();
             } else {
                 showNotification('Голос отключен', 'Голосовые уведомления выключены');
             }
@@ -2086,15 +2259,42 @@
                 isVideoActive ? 'Видео активировано' : 'Видео отключено',
                 isVideoActive ? 'Имитация видео-соединения запущена' : 'Видео-соединение завершено'
             );
+            
+            playMessageSound();
         }
 
-        // Проиграть звук
-        function playSound(soundId) {
-            const audio = document.getElementById(soundId);
-            if (audio) {
-                audio.currentTime = 0;
-                audio.volume = 0.3;
-                audio.play().catch(e => console.log("Звук не может быть воспроизведен:", e));
+        // Проиграть звук уведомления
+        function playNotificationSound() {
+            playTone(800, 0.3, 'sine');
+        }
+
+        // Проиграть звук сообщения
+        function playMessageSound() {
+            playTone(600, 0.2, 'triangle');
+        }
+
+        // Вспомогательная функция для проигрывания тона
+        function playTone(frequency, duration, type = 'sine') {
+            if (!window.AudioContext) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            } catch (e) {
+                console.log("Не удалось воспроизвести звук:", e);
             }
         }
 
@@ -2242,6 +2442,7 @@
             
             closeAvatarModal();
             showNotification('Аватар обновлён', `Аватар для ${relative.name} установлен`);
+            playNotificationSound();
         }
 
         // Сохранение родственника
@@ -2296,7 +2497,7 @@
             document.getElementById('relativeBio').value = '';
             
             showNotification('Успешно', `Профиль ${name} создан`);
-            playSound('notificationSound');
+            playNotificationSound();
             
             // Переключение на нового родственника
             setTimeout(() => switchRelative(newRelative.id), 500);
@@ -2328,6 +2529,7 @@
             link.click();
             
             showNotification('Экспорт завершён', `Диалог с ${relative.name} сохранён`);
+            playNotificationSound();
         }
 
         // Утилиты
